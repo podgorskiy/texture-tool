@@ -208,7 +208,7 @@ definitions = {
 
 libs = {
     'darwin': [],
-    'posix': ["rt", "m", "stdc++fs", "PVRTexLib"],
+    'posix': ["PVRTexLib"],
     'win32': [],
 }
 
@@ -225,18 +225,10 @@ extra_compile_args = {
 }
 
 extra_compile_cpp_args = {
-    'darwin': ['-std=c++14', '-lstdc++fs', '-Ofast'],
-    'posix': ['-std=c++14', '-lstdc++fs', '-Ofast'],
+    'darwin': ['-std=c++11', '-Ofast'],
+    'posix': ['-std=c++11', '-Ofast'],
     'win32': [],
 }
-
-extra_compile_c_args = {
-    'darwin': ['-std=c99', '-Ofast'],
-    'posix': ['-std=c99', '-Ofast'],
-    'win32': [],
-}
-
-extra_compile_asm_args = ['-DELF', '-D__x86_64__', '-DPIC', '-DTURBO', '-g', '-f elf64', '-Ox']
 
 extension = Extension("_pypvrtex",
                       sources,
@@ -254,8 +246,6 @@ extension_so = Extension(
         sources=[])
 
 extension.extra_compile_cpp_args = extra_compile_cpp_args[target_os]
-extension.extra_compile_c_args = extra_compile_c_args[target_os]
-extension.extra_compile_asm_args = extra_compile_asm_args
 
 setup(
     name='pypvrtex',
