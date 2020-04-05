@@ -30,3 +30,14 @@ def timeit(method):
         return result
     return timed
 
+print('Supported formats:')
+print(dir(pvr.PixelFormat))
+
+tex = pvr.load('albido.pvr')
+
+print(tex.pixel_format)
+print(tex.get_orientation(pvr.Axis.x))
+print(tex.get_orientation(pvr.Axis.y))
+print(tex.get_ogles_format)
+
+tex.save('albido_saved.pvr')

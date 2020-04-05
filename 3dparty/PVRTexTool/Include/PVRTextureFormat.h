@@ -27,7 +27,7 @@ namespace pvrtexture
 		 @Return		A new PixelType
 		 @Description	Creates an empty pixeltype.
 		*************************************************************************/
-		PixelType();
+		PixelType() {};
 
 		/*!***********************************************************************
 		 @Function		PixelType
@@ -35,7 +35,7 @@ namespace pvrtexture
 		 @Return		A new PixelType
 		 @Description	Initialises a new pixel type from a 64 bit integer value.
 		*************************************************************************/
-		PixelType(uint64 Type);
+		PixelType(uint64 Type): PixelTypeID(Type) {};
 
 		/*!***********************************************************************
 		 @Function		PixelType
@@ -48,11 +48,10 @@ namespace pvrtexture
 		 @Input			C3Bits
 		 @Input			C4Bits
 		 @Return		A new PixelType
-		 @Description	Takes up to 4 characters (CnName) and 4 values (CnBits) 
+		 @Description	Takes up to 4 characters (CnName) and 4 values (CnBits)
 						to create a new PixelType. Any unused channels should be set to 0.
 						For example: PixelType('r','g','b',0,8,8,8,0);
 		*************************************************************************/
-		PixelType(uint8 C1Name, uint8 C2Name, uint8 C3Name, uint8 C4Name, uint8 C1Bits, uint8 C2Bits, uint8 C3Bits, uint8 C4Bits);
 
 		struct PVR_DLL LowHigh
 		{
@@ -63,10 +62,6 @@ namespace pvrtexture
 		uint64	PixelTypeID;
 		uint8	PixelTypeChar[8];
 	};
-
-	static const PixelType PVRStandard8PixelType = PixelType('r','g','b','a',8,8,8,8);
-	static const PixelType PVRStandard16PixelType = PixelType('r','g','b','a',16,16,16,16);
-	static const PixelType PVRStandard32PixelType = PixelType('r','g','b','a',32,32,32,32);
 }
 
 #endif

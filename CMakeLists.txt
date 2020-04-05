@@ -104,6 +104,6 @@ add_library(pypvrtex SHARED ${SOURCES})
 ##############################################################
 # Linkage
 ##############################################################
-target_link_options(pypvrtex PRIVATE -Bstatic  -lPVRTexLib -Bstatic -lpthread -Bdynamic -L ${Python_LIBRARIES} )
+target_link_libraries(pypvrtex PUBLIC PVRTexLib pthread ${Python_LIBRARIES})
 
 SET_TARGET_PROPERTIES(pypvrtex PROPERTIES PREFIX "_")

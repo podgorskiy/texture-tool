@@ -202,7 +202,7 @@ namespace pvrtexture
 		*************************************************************************/
 		static CPVRTexture fromASTC(std::istream & in);
 
-	private:
+	//private:
 		size_t	m_stDataSize;		//!< Size of the texture data.
 		uint8*	m_pTextureData;		//!< Pointer to texture data.
 
