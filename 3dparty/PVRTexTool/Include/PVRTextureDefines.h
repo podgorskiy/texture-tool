@@ -20,6 +20,7 @@ template <typename KeyType, typename DataType>
 class PVR_DLL CPVRTMap;
 template<typename T>
 class PVR_DLL CPVRTArray;
+class PVR_DLL CPVRTString;
 #elif defined(_WINDLL_IMPORT)
 #define PVR_DLL __declspec(dllimport)
 //Forward declaration of various classes/structs used by this library. This imports their interfaces for DLLs.
@@ -29,6 +30,7 @@ template <typename KeyType, typename DataType>
 class PVR_DLL CPVRTMap;
 template<typename T>
 class PVR_DLL CPVRTArray;
+class PVR_DLL CPVRTString;
 #else
 
 /*!***********************************************************************

@@ -14,8 +14,8 @@
 
 #include "PVRTextureDefines.h"
 #include "PVRTextureFormat.h"
+#include "PVRTString.h"
 #include "PVRTMap.h"
-#include <string>
 
 namespace pvrtexture
 {
@@ -246,14 +246,6 @@ namespace pvrtexture
 		void getOGLESFormat(uint32& internalformat, uint32& format, uint32& type) const;
 
 		/*!***********************************************************************
-		@brief      	Gets the Vulkan equivalent values for this texture.
-						This will return any supported Vulkan texture formats, it is up to
-						the user to decide if these are valid for their current platform.
-		@return			VkFormat, represented by a uint32.
-		*************************************************************************/
-		uint32 getVulkanFormat() const;
-
-		/*!***********************************************************************
 		 @brief      	Gets the D3DFormat (up to DirectX 9 and Direct 3D Mobile)
 						equivalent values for this texture. This will return any 
 						supported D3D texture formats, it is up to the user to
@@ -267,7 +259,7 @@ namespace pvrtexture
 						for this texture. This will return any supported DX texture
 						formats, it is up to the user to decide if this is valid 
 						for their current platform.
-		 @return		DXGIFormat, represented by a uint32. 
+		 @return		GXGIFormat, represented by a uint32. 
 		*************************************************************************/
 		uint32 getDXGIFormat() const;
 
@@ -411,7 +403,7 @@ namespace pvrtexture
 						are returned simply for completeness.
 		 @return		Bump map order relative to rgba.
 		*************************************************************************/
-		std::string getBumpMapOrder() const;
+		CPVRTString getBumpMapOrder() const;
 
 		/*!***********************************************************************
 		 @brief      	Works out the number of possible texture atlas members in
@@ -433,7 +425,7 @@ namespace pvrtexture
                         negative. I.e. Z=Z-Positive, z=Z-Negative.
 		 @return		Cube map order string.
 		*************************************************************************/
-		std::string getCubeMapOrder() const;
+		CPVRTString getCubeMapOrder() const;
 
 		/*!***********************************************************************
 		 @brief      	Obtains the border size in each dimension for this texture.
@@ -493,7 +485,7 @@ namespace pvrtexture
 									In these instances PVRTexLib will assume it is simply
 									colour data.
 		*************************************************************************/
-		void setBumpMap(float bumpScale, const std::string & bumpOrder="xyz");
+		void setBumpMap(float bumpScale, CPVRTString bumpOrder="xyz");
 
 		/*!***********************************************************************
 		 @brief      	Sets the texture atlas coordinate meta data for later display.
@@ -520,7 +512,7 @@ namespace pvrtexture
 										long as they are NULL terminated.
 										NB: Values past the 6th character are not read.
 		*************************************************************************/
-		void setCubeMapOrder(const std::string & cubeMapOrder="XxYyZz");
+		void setCubeMapOrder(CPVRTString cubeMapOrder="XxYyZz");
 
 		/*!***********************************************************************
 		 @brief      	Sets a texture's border size data. This value is subtracted 
@@ -547,6 +539,6 @@ namespace pvrtexture
 		*************************************************************************/
 		void removeMetaData(const uint32& DevFOURCC, const uint32& u32Key);
 	};
-}
+};
 
 #endif

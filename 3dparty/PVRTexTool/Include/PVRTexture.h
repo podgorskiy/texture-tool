@@ -31,6 +31,7 @@ A number of header files from the PowerVR SDK Tools libraries are present in PVR
  \li PVRTError.h
  \li PVRTArray.h
  \li PVRTMap.h
+ \li PVRTString.h
  \li PVRTTexture.h
  
 These header files are included in the PVRTexLib package so that separate installation 
@@ -43,10 +44,9 @@ in the PowerVR Insider SDK directory.
 #ifndef _PVRTEXTURE_H
 #define _PVRTEXTURE_H
 
-#include <iostream>
-#include <string>
-
+#include "PVRTextureDefines.h"
 #include "PVRTextureHeader.h"
+#include "PVRTString.h"
 
 namespace pvrtexture
 {
@@ -91,7 +91,7 @@ namespace pvrtexture
 		 @param[in]		pTexture    Pointer to texture data
 		 @return		A new CPVRTexture.
 		*************************************************************************/
-		explicit CPVRTexture( const void* pTexture );
+		CPVRTexture( const void* pTexture );
 
 		/*!***********************************************************************
 		 @brief      	Creates a new texture as a copy of another.
@@ -156,7 +156,7 @@ namespace pvrtexture
 		 @param[in]		filepath        File path to write to
 		 @return		True if the method succeeds.
 		*************************************************************************/
-		bool saveFile(const std::string& filepath) const;
+		bool saveFile(const CPVRTString& filepath) const;
 	
 		/*!***********************************************************************
 		 @brief      	Writes out to a file, stripping any extensions specified
@@ -167,42 +167,16 @@ namespace pvrtexture
 		 @param[in]		eApi            Target API
 		 @return		True if the method succeeds.
 		*************************************************************************/
-		bool saveFileLegacyPVR(const std::string& filepath, ELegacyApi eApi) const;
+		bool saveFileLegacyPVR(const CPVRTString& filepath, ELegacyApi eApi) const;
 
 		/*!***********************************************************************
 		@brief      	Saves an ASTC File.
 		@param[in]	    filepath        File path to write to
 		@return			True if the method succeeds.
 		*************************************************************************/
-		bool saveASTCFile(const std::string& filepath) const;
+		bool saveASTCFile(const CPVRTString& filepath) const;
 
-		/*!***********************************************************************
-		@brief      	Convert texture to KTX
-		@param[in]	    out        Output stream for KTX data
-		*************************************************************************/
-		void toKTX(std::ostream & out) const;
-
-		/*!***********************************************************************
-		@brief      	Convert texture to ASTC
-		@param[in]	    out        Output stream for ASTC data
-		*************************************************************************/
-		void toASTC(std::ostream & out) const;
-
-		/*!***********************************************************************
-		@brief      	Makes a PVRTexture from a KTX file stream
-		@param[in]	    in        The KTX file stream
-		@return			The texture
-		*************************************************************************/
-		static CPVRTexture fromKTX(std::istream & in);
-
-		/*!***********************************************************************
-		@brief      	Makes a PVRTexture from a pointer to an ASTC file in memory
-		@param[in]	    in        The ASTC file stream
-		@return			The texture
-		*************************************************************************/
-		static CPVRTexture fromASTC(std::istream & in);
-
-	//private:
+	// private:
 		size_t	m_stDataSize;		//!< Size of the texture data.
 		uint8*	m_pTextureData;		//!< Pointer to texture data.
 
@@ -228,7 +202,6 @@ namespace pvrtexture
 		 @return		True if the method succeeds.
 		*************************************************************************/
 		bool privateLoadKTXFile(FILE* pTextureFile);
-		bool privateLoadKTXFile(std::istream & in);
 
 		/*!***********************************************************************
 		 @brief      	Saves a KTX File.
@@ -257,7 +230,6 @@ namespace pvrtexture
 		@return			True if the method succeeds.
 		*************************************************************************/
 		bool privateLoadASTCFile(FILE* pTextureFile);
-		bool privateLoadASTCFile(std::istream & in);
 
 		/*!***********************************************************************
 		@brief      	Saves an ASTC file.
@@ -274,7 +246,7 @@ namespace pvrtexture
 		 @param[in]		filename        File path to write to
 		 @return		True if the method succeeds.
 		*************************************************************************/
-		bool privateSaveCHeaderFile(FILE* pTextureFile, const std::string & filename) const;
+		bool privateSaveCHeaderFile(FILE* pTextureFile, CPVRTString filename) const;
 
 		/*!***********************************************************************
 		 @brief      	Saves a legacy PVR File - Uses version 2 file format.
@@ -284,7 +256,7 @@ namespace pvrtexture
 		*************************************************************************/
 		bool privateSaveLegacyPVRFile(FILE* pTextureFile, ELegacyApi eApi) const;
 	};
-}
+};
 
 #endif //_PVRTEXTURE_H
 

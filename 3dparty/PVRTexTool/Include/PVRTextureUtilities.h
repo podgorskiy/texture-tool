@@ -139,7 +139,7 @@ namespace pvrtexture
 	 @param[in]		sChannelOrder   Channel order
 	 @return		True if the method succeeds.
 	*************************************************************************/
-	bool PVR_DLL GenerateNormalMap(CPVRTexture& sTexture, const float fScale, const std::string & sChannelOrder);
+	bool PVR_DLL GenerateNormalMap(CPVRTexture& sTexture, const float fScale, CPVRTString sChannelOrder);
 
 	/*!***********************************************************************
 	 @brief      	Generates MIPMaps for a source texture. Default is to
@@ -175,6 +175,6 @@ namespace pvrtexture
 	 @return		True if the method succeeds.					
 	*************************************************************************/
 	bool PVR_DLL Transcode(CPVRTexture& sTexture, const PixelType ptFormat, const EPVRTVariableType eChannelType, const EPVRTColourSpace eColourspace, const ECompressorQuality eQuality=ePVRTCNormal, const bool bDoDither=false);
-}
+};
 #endif //_PVRTEXTURE_UTILTIES_H
 
