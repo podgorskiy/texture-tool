@@ -21,13 +21,13 @@ rel_so_path = 'none'
 
 if sys.platform == 'darwin':
     target_os = 'darwin'
-    rel_so_path = os.path.join('PVRTexTool', 'OSX_x86')
+    rel_so_path = os.path.join('3dparty', 'PVRTexTool', 'OSX_x86')
 elif os.name == 'posix':
     target_os = 'posix'
-    rel_so_path = os.path.join('PVRTexTool', 'Linux_x86_64')
+    rel_so_path = os.path.join('3dparty', 'PVRTexTool', 'Linux_x86_64')
 elif platform.system() == 'Windows':
     target_os = 'win32'
-    rel_so_path = os.path.join('PVRTexTool', 'Windows_x86_64')
+    rel_so_path = os.path.join('3dparty', 'PVRTexTool', 'Windows_x86_64')
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -83,7 +83,7 @@ def build_extension(self, ext):
         filename = get_ext_filename(self, fullname, True)
         print("\nCopying extension {}".format(ext.name))
 
-        src = os.path.join("3dparty", rel_so_path, filename)
+        src = os.path.join(rel_so_path, filename)
         if not os.path.exists(src):
             print("{} does not exist".format(src))
             return
@@ -214,7 +214,7 @@ libs = {
 
 extra_link = {
     'darwin': [],
-    'posix': ['-static-libstdc++', '-static-libgcc', '-L3dparty/PVRTexTool/Linux_x86_64/', '-lpthread', '-lPVRTexLib'],
+    'posix': ['-static-libstdc++', '-static-libgcc', '-L' + rel_so_path],
     'win32': [],
 }
 

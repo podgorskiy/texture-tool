@@ -3,11 +3,8 @@
 # See build_maylinux_wheels.sh
 
 git clone https://github.com/podgorskiy/pypvrtex.git
-cd bimpy
+cd pypvrtex
 git submodule update --init
-cd glfw
-git pull origin master
-cd ..
 
 # yum install -y libX11-devel libXcursor-devel libXrandr-devel libXinerama-devel mesa-libGL-devel libXi-devel
 
