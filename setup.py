@@ -8,8 +8,8 @@ from distutils.errors import *
 from distutils.dep_util import newer_group
 from distutils import log
 from distutils.command.build_ext import build_ext
+from distutils import sysconfig
 
-from codecs import open
 import os
 import sys
 import platform
@@ -17,15 +17,22 @@ import re
 import glob
 
 target_os = 'none'
+rel_so_path = 'none'
 
 if sys.platform == 'darwin':
     target_os = 'darwin'
+    rel_so_path = os.path.join('PVRTexTool', 'OSX_x86')
 elif os.name == 'posix':
     target_os = 'posix'
+    rel_so_path = os.path.join('PVRTexTool', 'Linux_x86_64')
 elif platform.system() == 'Windows':
     target_os = 'win32'
+    rel_so_path = os.path.join('PVRTexTool', 'Windows_x86_64')
 
 here = os.path.abspath(os.path.dirname(__file__))
+
+rel_site_packages = sysconfig.get_python_lib(prefix='')
+full_site_packages = sysconfig.get_python_lib()
 
 # with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
 #     long_description = f.read()
@@ -60,6 +67,34 @@ def filter_sources(sources):
 def build_extension(self, ext):
     """Modified version of build_extension method from distutils.
        Can handle compiler args for different files"""
+
+    def get_ext_filename(self, ext_name, no_abi=False):
+        ext_filename = self.get_ext_filename(ext_name)
+        if no_abi and sys.version_info >= (3, 0):
+            # The parts will be e.g. ["my_extension", "cpython-37m-x86_64-linux-gnu", "so"].
+            ext_filename_parts = ext_filename.split('.')
+            # Omit the second to last element.
+            without_abi = ext_filename_parts[:-2] + ext_filename_parts[-1:]
+            ext_filename = '.'.join(without_abi)
+        return ext_filename
+
+    if ext.name == 'libPVRTexLib':
+        fullname = self.get_ext_fullname(ext.name)
+        filename = get_ext_filename(self, fullname, True)
+        print("\nCopying extension {}".format(ext.name))
+
+        src = os.path.join("3dparty", rel_so_path, filename)
+        if not os.path.exists(src):
+            print("{} does not exist".format(src))
+            return
+        else:
+            dst = os.path.join(os.path.realpath(self.build_lib), filename)
+            print("Copying {} from {} to {}".format(ext.name, src, dst))
+            dst_dir = os.path.dirname(dst)
+            if not os.path.exists(dst_dir):
+                os.makedirs(dst_dir)
+            self.copy_file(src, dst)
+            return
 
     sources = ext.sources
     if sources is None or not isinstance(sources, (list, tuple)):
@@ -173,13 +208,13 @@ definitions = {
 
 libs = {
     'darwin': [],
-    'posix': ["rt", "m", "stdc++fs"],
+    'posix': ["rt", "m", "stdc++fs", "PVRTexLib"],
     'win32': [],
 }
 
 extra_link = {
     'darwin': [],
-    'posix': ['-static-libstdc++', '-static-libgcc', '-L 3dparty/PVRTexTool/Linux_x86_64/libPVRTexLib.so', '-lpthread'],
+    'posix': ['-static-libstdc++', '-static-libgcc', '-L3dparty/PVRTexTool/Linux_x86_64/', '-lpthread', '-lPVRTexLib'],
     'win32': [],
 }
 
@@ -214,6 +249,9 @@ extension = Extension("_pypvrtex",
                              extra_compile_args=extra_compile_args[target_os],
                              extra_link_args=extra_link[target_os],
                              libraries = libs[target_os])
+extension_so = Extension(
+        name=str('libPVRTexLib'),
+        sources=[])
 
 extension.extra_compile_cpp_args = extra_compile_cpp_args[target_os]
 extension.extra_compile_c_args = extra_compile_c_args[target_os]
@@ -245,5 +283,5 @@ setup(
 
     packages=['pypvrtex'],
 
-    ext_modules=[extension],
+    ext_modules=[extension, extension_so],
 )
