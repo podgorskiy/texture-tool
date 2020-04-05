@@ -208,13 +208,13 @@ definitions = {
 
 libs = {
     'darwin': [],
-    'posix': ["PVRTexLib"],
+    'posix': [],
     'win32': [],
 }
 
 extra_link = {
     'darwin': [],
-    'posix': ['-static-libstdc++', '-static-libgcc', '-L' + rel_so_path],
+    'posix': ['-static-libstdc++', '-static-libgcc'],
     'win32': [],
 }
 
@@ -258,15 +258,17 @@ setup(
     url='https://github.com/podgorskiy/pypvrtex',
 
     author='Stanislav Pidhorskyi',
-    author_email='stanislav@podgorskiy.com',
+    author_email='stpidhorskyi@mix.wvu.edu',
 
     license='MIT',
 
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
 
     keywords='pypvrtex',
