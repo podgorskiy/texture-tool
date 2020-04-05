@@ -5,6 +5,13 @@
 
 #include "common.h"
 
+#include <PVRTexture.h>
+#include <PVRTextureDefines.h>
+#include <PVRTextureFormat.h>
+#include <PVRTextureHeader.h>
+#include <PVRTextureUtilities.h>
+#include <PVRTextureVersion.h>
+
 #include <pybind11/operators.h>
 #include <pybind11/functional.h>
 #include <pybind11/stl.h>

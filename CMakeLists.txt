@@ -83,6 +83,7 @@ set (CMAKE_CXX_FLAGS "-fPIC -g  -msse2 -msse3 -msse4 -mpopcnt -funsafe-math-opti
 # Includes
 ##############################################################
 include_directories(3dparty/pybind11/include)
+include_directories(3dparty/PVRTexTool/Include)
 include_directories(${PYTHON_INCLUDE_DIR})
 include_directories(sources)
 include_directories("${PROJECT_BINARY_DIR}")
