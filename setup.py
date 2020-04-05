@@ -34,6 +34,10 @@ here = os.path.abspath(os.path.dirname(__file__))
 rel_site_packages = sysconfig.get_python_lib(prefix='')
 full_site_packages = sysconfig.get_python_lib()
 
+# patch CXXABI version to make it compatible with manylinux2014
+if target_os == 'posix':
+    os.system('perl -pi -e \'s/CXXABI_1.3.8/CXXABI_1.3.7/g\' ' + os.path.join(rel_so_path, 'libPVRTexLib.so'))
+
 # with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
 #     long_description = f.read()
 

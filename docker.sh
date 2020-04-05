@@ -5,6 +5,7 @@
 git clone https://github.com/podgorskiy/pypvrtex.git
 cd pypvrtex
 git submodule update --init
+# cd io
 
 # yum install -y libX11-devel libXcursor-devel libXrandr-devel libXinerama-devel mesa-libGL-devel libXi-devel
 
