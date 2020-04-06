@@ -2,12 +2,18 @@
 # Script to build wheels for manylinux. This script runs inside docker.
 # See build_maylinux_wheels.sh
 
-git clone https://github.com/podgorskiy/pypvrtex.git
-cd pypvrtex
-git submodule update --init
-# cd io
+# git clone https://github.com/podgorskiy/pypvrtex.git
+# cd pypvrtex
+# git submodule update --init
 
-# yum install -y libX11-devel libXcursor-devel libXrandr-devel libXinerama-devel mesa-libGL-devel libXi-devel
+mkdir 3dparty
+mkdir sources
+mkdir pypvrtex
+cp -R /io/pypvrtex/* ./pypvrtex
+cp -R /io/3dparty/* ./3dparty
+cp -R /io/sources/* ./sources
+cp /io/setup.py ./setup.py
+cp /io/postfix_wheel.py ./postfix_wheel.py
 
 for PYBIN in /opt/python/*/bin; do
     #"${PYBIN}/pip" install -r /io/dev-requirements.txt
