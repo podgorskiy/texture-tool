@@ -10,6 +10,7 @@ from distutils import log
 from distutils.command.build_ext import build_ext
 from distutils import sysconfig
 
+import shutil
 import os
 import sys
 import platform
@@ -36,6 +37,7 @@ full_site_packages = sysconfig.get_python_lib()
 
 # patch CXXABI version to make it compatible with manylinux2014
 if target_os == 'posix':
+    shutil.copyfile(os.path.join(rel_so_path, 'libPVRTexLib.so'), os.path.join(rel_so_path, 'libPVRTexLib.so_backup'))
     os.system('perl -pi -e \'s/CXXABI_1.3.8/CXXABI_1.3.7/g\' ' + os.path.join(rel_so_path, 'libPVRTexLib.so'))
 
 # with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
@@ -281,3 +283,6 @@ setup(
 
     ext_modules=[extension, extension_so],
 )
+
+if target_os == 'posix':
+    shutil.copyfile(os.path.join(rel_so_path, 'libPVRTexLib.so_backup'), os.path.join(rel_so_path, 'libPVRTexLib.so'))
