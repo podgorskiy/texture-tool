@@ -8,9 +8,7 @@ docker run -it --rm -e PLAT=manylinux2014_x86_64 -v `pwd`:/io quay.io/pypa/manyl
 me="$(whoami)"
 sudo chown "$me" -R wheelhouse
 
+./postfix.sh
+
+
 # CXXABI_1.3.8 CXXABI_1.3.7
-
-
-# CXXABI_1.3.5 CXXABI_1.3.3
-# GLIBCXX_3.4.18  GLIBCXX_3.4.13
-# GLIBC_2.15 GLIBC_2.12

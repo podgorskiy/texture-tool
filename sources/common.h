@@ -5,33 +5,15 @@
 #include <memory>
 #include <exception>
 
-#define HIDDEN __attribute__ ((visibility("hidden")))
-
-#define PYBIND11_NUMPY_OBJECT_DTYPE(Type) \
-    namespace pybind11 { namespace detail { \
-        template <> struct npy_format_descriptor<Type> { \
-        public: \
-            enum { value = npy_api::NPY_OBJECT_ }; \
-            static pybind11::dtype dtype() { \
-                if (auto ptr = npy_api::get().PyArray_DescrFromType_(value)) { \
-                    return reinterpret_borrow<pybind11::dtype>(ptr); \
-                } \
-                pybind11_fail("Unsupported buffer format!"); \
-            } \
-            static constexpr auto name = _("object"); \
-        }; \
-    }}
-
 namespace py = pybind11;
 
-PYBIND11_NUMPY_OBJECT_DTYPE(py::bytes)
-PYBIND11_NUMPY_OBJECT_DTYPE(py::object)
-
-
 typedef py::array_t<uint8_t, py::array::c_style> ndarray_uint8;
-typedef py::array_t<int64_t, py::array::c_style> ndarray_int64;
+typedef py::array_t<int8_t, py::array::c_style> ndarray_int8;
+typedef py::array_t<uint8_t, py::array::c_style> ndarray_uint16;
+typedef py::array_t<int8_t, py::array::c_style> ndarray_int16;
+typedef py::array_t<uint8_t, py::array::c_style> ndarray_uint32;
+typedef py::array_t<int8_t, py::array::c_style> ndarray_int32;
 typedef py::array_t<float, py::array::c_style> ndarray_float32;
-typedef py::array_t<py::object, py::array::c_style> ndarray_object;
 
 
 inline std::string string_format(const std::string fmt_str, va_list ap)

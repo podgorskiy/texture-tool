@@ -24,8 +24,9 @@ namespace pvrtexture
      @brief         Wrapper class for PVRTextureHeaderV3, adds 'smart' accessor functions.
     *************************************************************************/
 	class PVR_DLL CPVRTextureHeader
-	{	
-	protected:
+	{
+	public:
+	// protected:
 		PVRTextureHeaderV3											m_sHeader;		//!< Texture header as laid out in a file.
 		CPVRTMap<uint32, CPVRTMap<uint32,MetaDataBlock> >			m_MetaData;		//!< Map of all the meta data stored for a texture.
 
@@ -539,6 +540,6 @@ namespace pvrtexture
 		*************************************************************************/
 		void removeMetaData(const uint32& DevFOURCC, const uint32& u32Key);
 	};
-};
+}
 
 #endif

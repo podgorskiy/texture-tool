@@ -1,5 +1,5 @@
 #
-# Copyright 2017-2019 Stanislav Pidhorskyi. All rights reserved.
+# Copyright 2017-2020 Stanislav Pidhorskyi. All rights reserved.
 # License: https://raw.githubusercontent.com/podgorskiy/impy/master/LICENSE.txt
 #
 
@@ -35,7 +35,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 rel_site_packages = sysconfig.get_python_lib(prefix='')
 full_site_packages = sysconfig.get_python_lib()
 
-# patch CXXABI version to make it compatible with manylinux2014
+# patch CXXABI version to make it compatible with manylinux2014, we are going to revert that later
 if target_os == 'posix':
     shutil.copyfile(os.path.join(rel_so_path, 'libPVRTexLib.so'), os.path.join(rel_so_path, 'libPVRTexLib.so_backup'))
     os.system('perl -pi -e \'s/CXXABI_1.3.8/CXXABI_1.3.7/g\' ' + os.path.join(rel_so_path, 'libPVRTexLib.so'))
@@ -214,13 +214,13 @@ definitions = {
 
 libs = {
     'darwin': [],
-    'posix': [],
+    'posix': ['PVRTexLib'],
     'win32': [],
 }
 
 extra_link = {
     'darwin': [],
-    'posix': [],
+    'posix': ['-L'+rel_so_path],
     'win32': [],
 }
 
@@ -281,7 +281,7 @@ setup(
 
     packages=['pypvrtex'],
 
-    ext_modules=[extension, extension_so],
+    ext_modules=[extension, extension_so], install_requires=['imageio', 'numpy']
 )
 
 if target_os == 'posix':

@@ -3,7 +3,7 @@ import time
 import imageio
 import sys
 import PIL
-import PIL.Image
+from PIL import Image
 import io
 import numpy as np
 import pypvrtex as pvr
@@ -30,14 +30,44 @@ def timeit(method):
         return result
     return timed
 
+
 print('Supported formats:')
 print(dir(pvr.PixelFormat))
 
-tex = pvr.load('albido.pvr')
 
-print(tex.pixel_format)
-print(tex.get_orientation(pvr.Axis.x))
-print(tex.get_orientation(pvr.Axis.y))
-print(tex.get_ogles_format)
+tex = pvr.imread('test.jpg')
 
-tex.save('albido_saved.pvr')
+# tex = pvr.imread('test.pvr')
+
+print(tex)
+
+# tex.save_pvr('test.pvr')
+
+#print(tex)
+
+# tex = pvr.utils.resize(tex, 600, 700)
+
+tex = pvr.generate_mipmaps(tex)
+
+tex = pvr.utils.flip(tex)
+
+print(tex)
+
+print(tex)
+
+tex.save_pvr('test.pvr')
+
+tex.save_dds('test_2.dds')
+
+tex = pvr.transcode(tex, 'RGBA8888', dither=True)
+
+tex.colour_space = pvr.ColourSpace.sRGB
+
+print(tex)
+
+tex.save_pvr('test_2.pvr')
+
+
+# tex = pvr.generate_mipmaps(tex, mipmaps=2)
+#
+# print(tex)
