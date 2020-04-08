@@ -1,12 +1,12 @@
-import textool
+import texture_tool
 
 
-tex = textool.imread('railway_bridge_02_1k.hdr')
+tex = texture_tool.imread('railway_bridge_02_1k.hdr')
 
 print(tex)
 
-tex = textool.cubemap_from_equirectangular(tex)
-tex = textool.utils.flip(tex)
+tex = texture_tool.cubemap_from_equirectangular(tex)
+tex = texture_tool.utils.flip(tex)
 
 print(tex)
 

@@ -6,7 +6,7 @@ import PIL
 from PIL import Image
 import io
 import numpy as np
-import textool as tt
+import texture_tool as tt
 
 
 print('imported')

@@ -256,7 +256,7 @@ extension.extra_compile_cpp_args = extra_compile_cpp_args[target_os]
 setup(
     name='texture-tool',
 
-    version='0.0.1',
+    version='0.0.2',
 
     description='Reading images, PVRTC compression, ETC compression, PVR DDS containers, transcoding, mipmap generation, equirectangular to cubemap. ',
     # long_description=long_description,
@@ -277,9 +277,9 @@ setup(
         'Programming Language :: Python :: 3.8',
     ],
 
-    keywords='textool',
+    keywords='texture_tool',
 
-    packages=['textool'],
+    packages=['texture_tool'],
 
     ext_modules=[extension, extension_so], install_requires=['imageio', 'numpy', 'scipy']
 )

@@ -15,14 +15,14 @@
 
 import numpy as np
 
-from textool._pvrtex_loader import *
-from textool.imread import imread
-from textool.describe import describe as _describe
-from textool import utils
-from textool.downsample2x import downsample2x
-from textool.generate_mipmaps import generate_mipmaps
-from textool.transcode import transcode
-from textool.cubemap_from_equirectangular import cubemap_from_equirectangular
+from texture_tool._pvrtex_loader import *
+from texture_tool.imread import imread
+from texture_tool.describe import describe as _describe
+from texture_tool import utils
+from texture_tool.downsample2x import downsample2x
+from texture_tool.generate_mipmaps import generate_mipmaps
+from texture_tool.transcode import transcode
+from texture_tool.cubemap_from_equirectangular import cubemap_from_equirectangular
 
 
 def parse_bin_format(pixel_format):

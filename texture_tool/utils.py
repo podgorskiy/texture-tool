@@ -13,46 +13,46 @@
 # limitations under the License.
 # ==============================================================================
 
-import textool
+import texture_tool
 
 
-def resize(texture, width, height, depth=1, resize_mode=textool.ResizeMode.Cubic):
+def resize(texture, width, height, depth=1, resize_mode=texture_tool.ResizeMode.Cubic):
     if texture.num_mip_levels > 1:
         raise RuntimeError('"resize" operation is not permitted on texture with mipmap layers. '
                            'Generate mipmaps after all transformations are done.')
-    newtex = textool.copy(texture)
-    res = textool.inplace_resize(newtex, width, height, depth, resize_mode)
+    newtex = texture_tool.copy(texture)
+    res = texture_tool.inplace_resize(newtex, width, height, depth, resize_mode)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex
 
 
 def resize_canvas(texture, width, height, depth, x_offset, y_offset, z_offset):
-    newtex = textool.copy(texture)
-    res = textool.inplace_resize_canvas(newtex, width, height, depth, x_offset, y_offset, z_offset)
+    newtex = texture_tool.copy(texture)
+    res = texture_tool.inplace_resize_canvas(newtex, width, height, depth, x_offset, y_offset, z_offset)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex
 
 
 def rotate90(texture, axis, forward):
-    newtex = textool.copy(texture)
-    res = textool.inplace_rotate90(newtex, axis, forward)
+    newtex = texture_tool.copy(texture)
+    res = texture_tool.inplace_rotate90(newtex, axis, forward)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex
 
 
-def flip(texture, axis=textool.Axis.y):
-    newtex = textool.copy(texture)
-    res = textool.inplace_flip(newtex, axis)
+def flip(texture, axis=texture_tool.Axis.y):
+    newtex = texture_tool.copy(texture)
+    res = texture_tool.inplace_flip(newtex, axis)
     if not res:
         raise RuntimeError('Operation failed')
     orientation = newtex.get_orientation(axis)
     newtex.set_orientation(axis, not orientation)
     if newtex.num_faces == 6:
-        v1 = textool.view(newtex, 0, 2)
-        v2 = textool.view(newtex, 0, 3)
+        v1 = texture_tool.view(newtex, 0, 2)
+        v2 = texture_tool.view(newtex, 0, 3)
         v1_ = v1 + 0
         v2_ = v2 + 0
         v2[:] = v1_
@@ -62,24 +62,24 @@ def flip(texture, axis=textool.Axis.y):
 
 
 def colour_mipmaps(texture):
-    newtex = textool.copy(texture)
-    res = textool.inplace_colour_mipmaps(newtex)
+    newtex = texture_tool.copy(texture)
+    res = texture_tool.inplace_colour_mipmaps(newtex)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex
 
 
 def bleed(texture):
-    newtex = textool.copy(texture)
-    res = textool.inplace_bleed(newtex)
+    newtex = texture_tool.copy(texture)
+    res = texture_tool.inplace_bleed(newtex)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex
 
 
 def premultiply_alpha(texture):
-    newtex = textool.copy(texture)
-    res = textool.inplace_premultiply_alpha(newtex)
+    newtex = texture_tool.copy(texture)
+    res = texture_tool.inplace_premultiply_alpha(newtex)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex

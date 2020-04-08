@@ -16,7 +16,7 @@
 import scipy.ndimage
 import numpy as np
 import warnings
-import textool
+import texture_tool
 
 
 # static inline double sinc_filter(double x)
@@ -74,7 +74,7 @@ def _downsample2x_bspline(input, order=3):
 
 
 def downsample2x(input, type):
-    if not textool.is_power_of_two(input.shape[:-1]):
+    if not texture_tool.is_power_of_two(input.shape[:-1]):
         if type == 'area_average':
             warnings.warn("area_average is not permitted for generating mipmaps for non power of two images. "
                           "Forcing bspline instead", UserWarning)

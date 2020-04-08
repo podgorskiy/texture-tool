@@ -13,21 +13,21 @@
 # limitations under the License.
 # ==============================================================================
 
-import textool
+import texture_tool
 
 
-def transcode(texture, format, channel_type=None, colour_space=None, quality=textool.Quality.Normal, dither=False):
-    newtex = textool.copy(texture)
+def transcode(texture, format, channel_type=None, colour_space=None, quality=texture_tool.Quality.Normal, dither=False):
+    newtex = texture_tool.copy(texture)
     if isinstance(format, str):
-        if format in textool.PixelFormat.__entries:
-            format = textool.PixelFormat.__entries[format][0]
+        if format in texture_tool.PixelFormat.__entries:
+            format = texture_tool.PixelFormat.__entries[format][0]
         else:
-            format = textool.format_from_string(format)
+            format = texture_tool.format_from_string(format)
     if channel_type is None:
         channel_type = texture.channel_type
     if colour_space is None:
         colour_space = texture.colour_space
-    res = textool.inplace_transcode(newtex, format, channel_type, colour_space, quality, dither)
+    res = texture_tool.inplace_transcode(newtex, format, channel_type, colour_space, quality, dither)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex

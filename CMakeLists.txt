@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.6)
 
-project(textool)
+project(texture_tool)
 
-set(EXECUTABLE_NAME "textool")
+set(EXECUTABLE_NAME "texture_tool")
 
 option(USE_MSVC_RUNTIME_LIBRARY_DLL OFF)
 set(ENABLE_STATIC ON "Build static libraries" FORCE)
@@ -99,11 +99,11 @@ file(GLOB_RECURSE SOURCES sources/*.cpp sources/*.h sources/*.c sources/*.cc)
 ##############################################################
 # Targets
 ##############################################################
-add_library(textool SHARED ${SOURCES})
+add_library(texture_tool SHARED ${SOURCES})
 
 ##############################################################
 # Linkage
 ##############################################################
-target_link_libraries(textool PUBLIC PVRTexLib pthread ${Python_LIBRARIES})
+target_link_libraries(texture_tool PUBLIC PVRTexLib pthread ${Python_LIBRARIES})
 
-SET_TARGET_PROPERTIES(textool PROPERTIES PREFIX "_")
+SET_TARGET_PROPERTIES(texture_tool PROPERTIES PREFIX "_")

@@ -13,17 +13,17 @@
 # limitations under the License.
 # ==============================================================================
 
-import textool
+import texture_tool
 
 
 def describe(self):
-    assert isinstance(self, textool.PVRTexture)
+    assert isinstance(self, texture_tool.PVRTexture)
     s = '<' + '\n'
     members = [attr for attr in dir(self) if not callable(getattr(self, attr)) and not attr.startswith("__")]
     for attr in members:
         s += '\t' + attr + ': ' + str(getattr(self, attr)) + '\n'
-    s += '\t' + str('Flipped X: ' + str(self.get_orientation(textool.Axis.x))) + '\n'
-    s += '\t' + str('Flipped Y: ' + str(self.get_orientation(textool.Axis.y))) + '\n'
+    s += '\t' + str('Flipped X: ' + str(self.get_orientation(texture_tool.Axis.x))) + '\n'
+    s += '\t' + str('Flipped Y: ' + str(self.get_orientation(texture_tool.Axis.y))) + '\n'
     s += '\t' + str('Width: ' + str(self.get_width())) + '\n'
     s += '\t' + str('Height: ' + str(self.get_height())) + '\n'
     s += '\t' + str('Depth: ' + str(self.get_depth())) + '\n'
