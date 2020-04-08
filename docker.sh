@@ -8,8 +8,8 @@
 
 mkdir 3dparty
 mkdir sources
-mkdir textool
-cp -R /io/textool/* ./textool
+mkdir texture_tool
+cp -R /io/texture_tool/* ./texture_tool
 cp -R /io/3dparty/* ./3dparty
 cp -R /io/sources/* ./sources
 cp /io/setup.py ./setup.py
