@@ -13,18 +13,18 @@
 # limitations under the License.
 # ==============================================================================
 
-import pypvrtex
+import textool
 import numpy as np
 import warnings
-from pypvrtex.downsample2x import downsample2x
+from textool.downsample2x import downsample2x
 
 
 def generate_mipmaps(texture, gamma=2.2):
-    texture = pypvrtex.copy(texture)
-    res = pypvrtex.inplace_generate_mipmaps(texture, pypvrtex.ResizeMode.Nearest, np.uint32(-1))  # preallocate space
+    texture = textool.copy(texture)
+    res = textool.inplace_generate_mipmaps(texture, textool.ResizeMode.Nearest, np.uint32(-1))  # preallocate space
     if not res:
         raise RuntimeError('Operation failed')
-    v = pypvrtex.view(texture, 0, 0)
+    v = textool.view(texture, 0, 0)
     img = texture.cast_to_float(v)
 
     if texture.needs_gamma_correction:
@@ -41,7 +41,7 @@ def generate_mipmaps(texture, gamma=2.2):
 
     for i in range(1, texture.num_mip_levels):
         img = downsample2x(img, type=downsample_type)
-        v = pypvrtex.view(texture, i, 0)
+        v = textool.view(texture, i, 0)
         img_to_save = img * max_val
         if texture.needs_gamma_correction:
             img_to_save = np.clip(img_to_save, 0, None)

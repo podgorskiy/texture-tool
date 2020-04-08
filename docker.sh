@@ -8,8 +8,8 @@
 
 mkdir 3dparty
 mkdir sources
-mkdir pypvrtex
-cp -R /io/pypvrtex/* ./pypvrtex
+mkdir textool
+cp -R /io/textool/* ./textool
 cp -R /io/3dparty/* ./3dparty
 cp -R /io/sources/* ./sources
 cp /io/setup.py ./setup.py

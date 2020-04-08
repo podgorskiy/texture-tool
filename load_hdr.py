@@ -1,12 +1,12 @@
-import pypvrtex
+import textool
 
 
-tex = pypvrtex.imread('railway_bridge_02_1k.hdr')
+tex = textool.imread('railway_bridge_02_1k.hdr')
 
 print(tex)
 
-tex = pypvrtex.cubemap_from_equirectangular(tex)
-tex = pypvrtex.utils.flip(tex)
+tex = textool.cubemap_from_equirectangular(tex)
+tex = textool.utils.flip(tex)
 
 print(tex)
 

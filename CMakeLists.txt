@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.6)
 
-project(pypvrtex)
+project(textool)
 
-set(EXECUTABLE_NAME "pypvrtex")
+set(EXECUTABLE_NAME "textool")
 
 option(USE_MSVC_RUNTIME_LIBRARY_DLL OFF)
 set(ENABLE_STATIC ON "Build static libraries" FORCE)
@@ -99,11 +99,11 @@ file(GLOB_RECURSE SOURCES sources/*.cpp sources/*.h sources/*.c sources/*.cc)
 ##############################################################
 # Targets
 ##############################################################
-add_library(pypvrtex SHARED ${SOURCES})
+add_library(textool SHARED ${SOURCES})
 
 ##############################################################
 # Linkage
 ##############################################################
-target_link_libraries(pypvrtex PUBLIC PVRTexLib pthread ${Python_LIBRARIES})
+target_link_libraries(textool PUBLIC PVRTexLib pthread ${Python_LIBRARIES})
 
-SET_TARGET_PROPERTIES(pypvrtex PROPERTIES PREFIX "_")
+SET_TARGET_PROPERTIES(textool PROPERTIES PREFIX "_")

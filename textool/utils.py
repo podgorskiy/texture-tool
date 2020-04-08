@@ -13,46 +13,46 @@
 # limitations under the License.
 # ==============================================================================
 
-import pypvrtex
+import textool
 
 
-def resize(texture, width, height, depth=1, resize_mode=pypvrtex.ResizeMode.Cubic):
+def resize(texture, width, height, depth=1, resize_mode=textool.ResizeMode.Cubic):
     if texture.num_mip_levels > 1:
         raise RuntimeError('"resize" operation is not permitted on texture with mipmap layers. '
                            'Generate mipmaps after all transformations are done.')
-    newtex = pypvrtex.copy(texture)
-    res = pypvrtex.inplace_resize(newtex, width, height, depth, resize_mode)
+    newtex = textool.copy(texture)
+    res = textool.inplace_resize(newtex, width, height, depth, resize_mode)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex
 
 
 def resize_canvas(texture, width, height, depth, x_offset, y_offset, z_offset):
-    newtex = pypvrtex.copy(texture)
-    res = pypvrtex.inplace_resize_canvas(newtex, width, height, depth, x_offset, y_offset, z_offset)
+    newtex = textool.copy(texture)
+    res = textool.inplace_resize_canvas(newtex, width, height, depth, x_offset, y_offset, z_offset)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex
 
 
 def rotate90(texture, axis, forward):
-    newtex = pypvrtex.copy(texture)
-    res = pypvrtex.inplace_rotate90(newtex, axis, forward)
+    newtex = textool.copy(texture)
+    res = textool.inplace_rotate90(newtex, axis, forward)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex
 
 
-def flip(texture, axis=pypvrtex.Axis.y):
-    newtex = pypvrtex.copy(texture)
-    res = pypvrtex.inplace_flip(newtex, axis)
+def flip(texture, axis=textool.Axis.y):
+    newtex = textool.copy(texture)
+    res = textool.inplace_flip(newtex, axis)
     if not res:
         raise RuntimeError('Operation failed')
     orientation = newtex.get_orientation(axis)
     newtex.set_orientation(axis, not orientation)
     if newtex.num_faces == 6:
-        v1 = pypvrtex.view(newtex, 0, 2)
-        v2 = pypvrtex.view(newtex, 0, 3)
+        v1 = textool.view(newtex, 0, 2)
+        v2 = textool.view(newtex, 0, 3)
         v1_ = v1 + 0
         v2_ = v2 + 0
         v2[:] = v1_
@@ -62,24 +62,24 @@ def flip(texture, axis=pypvrtex.Axis.y):
 
 
 def colour_mipmaps(texture):
-    newtex = pypvrtex.copy(texture)
-    res = pypvrtex.inplace_colour_mipmaps(newtex)
+    newtex = textool.copy(texture)
+    res = textool.inplace_colour_mipmaps(newtex)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex
 
 
 def bleed(texture):
-    newtex = pypvrtex.copy(texture)
-    res = pypvrtex.inplace_bleed(newtex)
+    newtex = textool.copy(texture)
+    res = textool.inplace_bleed(newtex)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex
 
 
 def premultiply_alpha(texture):
-    newtex = pypvrtex.copy(texture)
-    res = pypvrtex.inplace_premultiply_alpha(newtex)
+    newtex = textool.copy(texture)
+    res = textool.inplace_premultiply_alpha(newtex)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex

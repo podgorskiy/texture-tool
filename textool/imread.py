@@ -15,14 +15,14 @@
 
 import imageio as io
 import numpy as np
-import pypvrtex
+import textool
 
 
 def imread(filename):
-    if pypvrtex.check_if_pvr(filename):
-        tex = pypvrtex.load_pvr(filename)
-    if pypvrtex.check_if_dds(filename):
-        tex = pypvrtex.load_dds(filename)
+    if textool.check_if_pvr(filename):
+        tex = textool.load_pvr(filename)
+    if textool.check_if_dds(filename):
+        tex = textool.load_dds(filename)
     img = io.imread(filename)
     if len(img.shape) != 3 and len(img.shape) != 4:
         raise RuntimeError('Wrong shape, must be 3-dimensional for 2D textures and 4-dimensional for 3D textures')
@@ -34,4 +34,4 @@ def imread(filename):
         img = np.concatenate([img, np.zeros_like(img[:, :, :1])], axis=2)
     if img.shape[-1] == 3:
         img = np.concatenate([img, 255 * np.ones_like(img[:, :, :1])], axis=2)
-    return pypvrtex.from_numpy(img)
+    return textool.from_numpy(img)

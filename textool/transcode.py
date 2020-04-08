@@ -13,21 +13,21 @@
 # limitations under the License.
 # ==============================================================================
 
-import pypvrtex
+import textool
 
 
-def transcode(texture, format, channel_type=None, colour_space=None, quality=pypvrtex.Quality.Normal, dither=False):
-    newtex = pypvrtex.copy(texture)
+def transcode(texture, format, channel_type=None, colour_space=None, quality=textool.Quality.Normal, dither=False):
+    newtex = textool.copy(texture)
     if isinstance(format, str):
-        if format in pypvrtex.PixelFormat.__entries:
-            format = pypvrtex.PixelFormat.__entries[format][0]
+        if format in textool.PixelFormat.__entries:
+            format = textool.PixelFormat.__entries[format][0]
         else:
-            format = pypvrtex.format_from_string(format)
+            format = textool.format_from_string(format)
     if channel_type is None:
         channel_type = texture.channel_type
     if colour_space is None:
         colour_space = texture.colour_space
-    res = pypvrtex.inplace_transcode(newtex, format, channel_type, colour_space, quality, dither)
+    res = textool.inplace_transcode(newtex, format, channel_type, colour_space, quality, dither)
     if not res:
         raise RuntimeError('Operation failed')
     return newtex

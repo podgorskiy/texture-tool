@@ -14,22 +14,22 @@
 # ==============================================================================
 
 import numpy as np
-from pypvrtex.coordinate_transform import cube_to_equirectangular
-import pypvrtex
+from textool.coordinate_transform import cube_to_equirectangular
+import textool
 import warnings
-from pypvrtex.downsample2x import downsample2x
+from textool.downsample2x import downsample2x
 import scipy.ndimage
 #import matplotlib.pyplot as plt
 
 
 def cubemap_from_equirectangular(texture, cubemap_size=None, gamma=2.2):
-    v = pypvrtex.view(texture, 0, 0)
+    v = textool.view(texture, 0, 0)
     img = texture.cast_to_float(v)
 
     if cubemap_size is None:
         cubemap_size = int(texture.get_width(0) / 4)
 
-    cube_texture = pypvrtex.new_texture(texture.pixel_format, cubemap_size, cubemap_size, 1, 1, 1, 6, texture.colour_space, texture.channel_type, False)
+    cube_texture = textool.new_texture(texture.pixel_format, cubemap_size, cubemap_size, 1, 1, 1, 6, texture.colour_space, texture.channel_type, False)
 
     if texture.needs_gamma_correction:
         img = np.power(img, gamma)
@@ -56,7 +56,7 @@ def cubemap_from_equirectangular(texture, cubemap_size=None, gamma=2.2):
         #plt.subplot(611 + face)
         #plt.imshow(cube_face * max_val)
 
-        v = pypvrtex.view(cube_texture, 0, face)
+        v = textool.view(cube_texture, 0, face)
         img_to_save = cube_face * max_val
         if texture.needs_gamma_correction:
             img_to_save = np.clip(img_to_save, 0, None)

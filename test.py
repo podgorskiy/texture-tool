@@ -6,7 +6,7 @@ import PIL
 from PIL import Image
 import io
 import numpy as np
-import pypvrtex as pvr
+import textool as pvr
 
 
 print('imported')

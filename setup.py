@@ -214,7 +214,7 @@ definitions = {
 
 libs = {
     'darwin': [],
-    'posix': ['PVRTexLib'],
+    'posix': [],  # 'PVRTexLib'],
     'win32': [],
 }
 
@@ -254,11 +254,11 @@ extension_so = Extension(
 extension.extra_compile_cpp_args = extra_compile_cpp_args[target_os]
 
 setup(
-    name='pypvrtex',
+    name='texture-tool',
 
     version='0.0.1',
 
-    description='pypvrtex',
+    description='Reading images, PVRTC compression, ETC compression, PVR DDS containers, transcoding, mipmap generation, equirectangular to cubemap. ',
     # long_description=long_description,
 
     url='https://github.com/podgorskiy/pypvrtex',
@@ -277,11 +277,11 @@ setup(
         'Programming Language :: Python :: 3.8',
     ],
 
-    keywords='pypvrtex',
+    keywords='textool',
 
-    packages=['pypvrtex'],
+    packages=['textool'],
 
-    ext_modules=[extension, extension_so], install_requires=['imageio', 'numpy']
+    ext_modules=[extension, extension_so], install_requires=['imageio', 'numpy', 'scipy']
 )
 
 if target_os == 'posix':
