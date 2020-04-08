@@ -261,7 +261,7 @@ setup(
     description='Reading images, PVRTC compression, ETC compression, PVR DDS containers, transcoding, mipmap generation, equirectangular to cubemap. ',
     # long_description=long_description,
 
-    url='https://github.com/podgorskiy/pypvrtex',
+    url='https://github.com/podgorskiy/texture-tool',
 
     author='Stanislav Pidhorskyi',
     author_email='stpidhorskyi@mix.wvu.edu',

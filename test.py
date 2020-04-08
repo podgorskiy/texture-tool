@@ -6,7 +6,7 @@ import PIL
 from PIL import Image
 import io
 import numpy as np
-import textool as pvr
+import textool as tt
 
 
 print('imported')
@@ -32,10 +32,10 @@ def timeit(method):
 
 
 print('Supported formats:')
-print(dir(pvr.PixelFormat))
+print(dir(tt.PixelFormat))
 
 
-tex = pvr.imread('test.jpg')
+tex = tt.imread('test.jpg')
 
 # tex = pvr.imread('test.pvr')
 
@@ -47,9 +47,9 @@ print(tex)
 
 # tex = pvr.utils.resize(tex, 600, 700)
 
-tex = pvr.generate_mipmaps(tex)
+tex = tt.generate_mipmaps(tex)
 
-tex = pvr.utils.flip(tex)
+tex = tt.utils.flip(tex)
 
 print(tex)
 
@@ -59,9 +59,9 @@ tex.save_pvr('test.pvr')
 
 tex.save_dds('test_2.dds')
 
-tex = pvr.transcode(tex, 'RGBA8888', dither=True)
+tex = tt.transcode(tex, 'RGBA8888', dither=True)
 
-tex.colour_space = pvr.ColourSpace.sRGB
+tex.colour_space = tt.ColourSpace.sRGB
 
 print(tex)
 
