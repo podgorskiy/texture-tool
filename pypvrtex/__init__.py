@@ -22,6 +22,7 @@ from pypvrtex import utils
 from pypvrtex.downsample2x import downsample2x
 from pypvrtex.generate_mipmaps import generate_mipmaps
 from pypvrtex.transcode import transcode
+from pypvrtex.cubemap_from_equirectangular import cubemap_from_equirectangular
 
 
 def parse_bin_format(pixel_format):

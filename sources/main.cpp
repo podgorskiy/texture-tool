@@ -1,9 +1,21 @@
-/*
- * Copyright 2019-2020 Stanislav Pidhorskyi. All rights reserved.
- * License: https://raw.githubusercontent.com/podgorskiy/bimpy/master/LICENSE.txt
- */
+//Copyright 2020 Stanislav Pidhorskyi
+//
+//Licensed under the Apache License, Version 2.0 (the "License");
+//you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+//Unless required by applicable law or agreed to in writing, software
+//distributed under the License is distributed on an "AS IS" BASIS,
+//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//See the License for the specific language governing permissions and
+//limitations under the License.
+//==============================================================================
+
 
 #include "common.h"
+#include "coordinate_transform.h"
 
 #include <PVRTexture.h>
 #include <PVRTextureUtilities.h>
@@ -314,6 +326,16 @@ pvrtexture::CPVRTexture* from_numpy(py::array_t<T, py::array::c_style> array, EP
 	pvrtexture::CPVRTextureHeader header(ptype, height, width, depth, 1, 1, 1, eColourSpace, channelType, premultiplied);
 
 	auto pvr = new pvrtexture::CPVRTexture(header, buf.ptr);
+	pvr->setOrientation((EPVRTOrientation)(ePVRTOrientRight | ePVRTOrientDown));
+	return pvr;
+}
+
+
+pvrtexture::CPVRTexture* new_texture(Format pixel_type, int width, int height, int depth, int num_mipmap, int num_array, int num_faces, EPVRTColourSpace eColourSpace, EPVRTVariableType channelType, bool premultiplied)
+{
+	pvrtexture::CPVRTextureHeader header(pixel_type, height, width, depth, num_mipmap, num_array, num_faces, eColourSpace, channelType, premultiplied);
+
+	auto pvr = new pvrtexture::CPVRTexture(header);
 	pvr->setOrientation((EPVRTOrientation)(ePVRTOrientRight | ePVRTOrientDown));
 	return pvr;
 }
@@ -664,5 +686,5 @@ PYBIND11_MODULE(_pypvrtex, m)
 		uint64_t format = parseType(str);
 		return (Format)format;
 	});
-
+	m.def("new_texture", new_texture);
 }

@@ -50,6 +50,14 @@ def flip(texture, axis=pypvrtex.Axis.y):
         raise RuntimeError('Operation failed')
     orientation = newtex.get_orientation(axis)
     newtex.set_orientation(axis, not orientation)
+    if newtex.num_faces == 6:
+        v1 = pypvrtex.view(newtex, 0, 2)
+        v2 = pypvrtex.view(newtex, 0, 3)
+        v1_ = v1 + 0
+        v2_ = v2 + 0
+        v2[:] = v1_
+        v1[:] = v2_
+
     return newtex
 
 
